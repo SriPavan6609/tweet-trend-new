@@ -14,17 +14,14 @@ environment {
             }
         }
         stage('SonarQube analysis') {
-    tools {
-        jdk "jdk17" // the name you have given the JDK installation in Global Tool Configuration
-    }
-    environment {
-        scannerHome = tool 'sripavan-sonar-scanner' // the name you have given the Sonar Scanner (in Global Tool Configuration)
-    }
-    steps {
-        withSonarQubeEnv(installationName: 'sripavan-sonarqube-server') {
-            sh "${scannerHome}/bin/sonar-scanner -X"
+            environment {
+                scannerHome = tool 'sripavan-sonar-scanner' // the name you have given the Sonar Scanner (in Global Tool Configuration)
+            }
+            steps {
+                withSonarQubeEnv(installationName: 'sripavan-sonarqube-server') {
+                sh "${scannerHome}/bin/sonar-scanner -X"
+             }
         }
-    }
     }
 }
 }
